@@ -14,12 +14,11 @@ const qstashClient = new QStashClient({
 export const sendEmail = async ({email ,subject, message}: EmailParams) => {
 
     await qstashClient.publishJSON({
-        url: `${config.env.prodApiEndpoint}/api/send-email`, // 🔁 remplace par ton URL réelle
+        url: `${config.env.prodApiEndpoint}/api/send-email`, // 
         body: {
-        from: "JS Mastery <contact@adrianjsmastery.com>",
-        to : email,
-        subject,
-        html : message,
+            email,
+            subject,
+            message,
         },
     });
 }
