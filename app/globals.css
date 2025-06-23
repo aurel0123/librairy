@@ -63,7 +63,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 :root {
-  --background: hsl(25, 21%, 95%);
+  --background: hsl(0, 0%, 100%);
   --foreground: hsl(25, 5%, 10%);
   --card: hsl(25, 21%, 90%);
   --card-foreground: hsl(25, 5%, 15%);
