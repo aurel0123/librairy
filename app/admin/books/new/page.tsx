@@ -1,4 +1,4 @@
-import BookForm from '@/components/BookForm'
+import BookForm from '@/components/admin/forms/BookForm'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import React from 'react'
@@ -6,7 +6,7 @@ import React from 'react'
 const page = () => {
     return (
         <>
-            <Button asChild className ="back-btn">
+            <Button asChild className ="back-btn mt-10">
                 <Link href="/admin/books">
                     Go Back
                 </Link>

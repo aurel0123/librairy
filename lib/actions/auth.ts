@@ -32,7 +32,7 @@ export const signInWithCreadentials = async (params : Pick<AuthCredentials , "em
         return {success : true };
     } catch (error) {
         console.log(error , "Erreur lors de la connexion de l'utilisateur");
-        return {success : false , error : "Une erreur s'est produite lors de la connexion. Veuillez réessayer plus tard."};
+        return {success : false , error : "Mots de passe ou email incorrect."};
     }
 }
 

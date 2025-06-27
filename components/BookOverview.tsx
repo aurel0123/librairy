@@ -1,22 +1,41 @@
 import Image from 'next/image'
 import React from 'react'
-import { Button } from './ui/button'
 import BookCover from './BookCover'
+import { db } from '@/database/drizzle';
+import { users } from '@/database/schema';
+import { eq } from 'drizzle-orm';
+import BorrowBook from './BorrowBook';
 
+interface Props extends Book {
+  userId : string;
+}
 
-const BookOverview = (
+const BookOverview = async (
   {
     title,
     author,
     genre,
     rating,
-    total_copies,
-    available_copies,
+    totalCopies,
+    availableCopies,
     description,
     coverColor,
     coverUrl,
-  } : Book
+    id ,
+    userId
+  } : Props
 ) => {
+
+  const [user] = await db
+  .select()
+  .from(users)
+  .where(eq(users.id,userId))
+  .limit(1)
+
+  const borrowingEligility = {
+    isEligible : availableCopies > 0 && user?.status === "APPROVED", 
+    message : availableCopies <= 0 ? "Livre non disponible" : "Vous êtes pas autorisé à preter ce livre"
+  } ; 
   return (
     <section className='book-overview'>
       <div className='flex flex-1 flex-col gap-5'>
@@ -40,20 +59,25 @@ const BookOverview = (
 
         <div className="book-copies">
           <p>
-            Total Books <span>{total_copies}</span>
+            Total Books <span>{totalCopies}</span>
           </p>
 
           <p>
-            Available Books <span>{available_copies}</span>
+            Available Books <span>{availableCopies}</span>
           </p>
         </div>
 
         <p className="book-description">{description}</p>
 
-        <Button className="book-overview_btn">
-          <Image src="/icons/book.svg" alt="Book" height={20} width={20} />
-          <p className='font-bebas-neue text-dark-100 text-xl'>Borrow</p>
-        </Button>
+        {
+          user && (
+            <BorrowBook
+              userId = {userId} 
+              bookId = {id} 
+              borrowingEligility = {borrowingEligility}
+            />
+          )
+        }
       </div>
 
       <div className="relative flex flex-1 justify-center">

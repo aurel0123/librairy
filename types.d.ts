@@ -1,18 +1,19 @@
 interface Book {
-    id : number ; 
-    title : string ; 
-    author : string ; 
-    genre : string ; 
-    rating : number ; 
-    total_copies : number ; 
-    available_copies : number ; 
-    description : string ; 
-    coverColor : string ; 
-    coverUrl : string ; 
-    video : string ;
-    summary : string ; 
-    isLoanedBook? : boolean ;
+    id: string;
+    title: string;
+    author: string;
+    genre: string;
+    rating: number;
+    totalCopies: number;
+    availableCopies: number;
+    description: string;
+    coverColor: string;
+    coverUrl: string;
+    videoUrl: string;
+    summary: string;
+    createdAt: Date | null;
 }
+
 
 interface AuthCredentials { 
     fullName : string ;
@@ -26,4 +27,22 @@ interface EmailParams {
     email: string;
     subject: string;
     message: string;
+}
+
+interface BookParams {
+    title: string;
+    author: string;
+    genre: string;
+    rating: number;
+    coverUrl: string;
+    coverColor: string;
+    description: string;
+    totalCopies: number;
+    videoUrl: string;
+    summary: string;
+}
+
+interface BorrowBookparams {
+    userId : string , 
+    bookId : string
 }

@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import Link from 'next/link';
 import { FIELD_NAMES, FIELD_TYPES } from '@/constants/indes';
 import ImageUpload from "./imageUpload"
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { useRouter } from "next/navigation";
 
 
@@ -40,18 +40,15 @@ export default function AuthForm<T extends FieldValues>({type , schema , default
   const handleSubmit : SubmitHandler<T> = async (data)=> {
     const result  = await onSubmit(data);
     if(result.success){
-      toast({
-        title: "Success",
+      toast.success("Success" , {
         description: isSignIn
           ? "You have successfully signed in."
           : "You have successfully signed up.",
       }) ; 
       router.push("/");
     }else{
-      toast({
-        title: `Error ${isSignIn ? "signing in" : "signing up"}`,
-        description: result.error ?? "An error occurred.",
-        variant: "destructive",
+      toast.error(`Error ${isSignIn ? "signing in" : "signing up"}` , {
+        description: result.error ?? "An error occurred."
       });
     }
   }

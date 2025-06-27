@@ -13,3 +13,5 @@ export const getInitials = (name: string): string =>
     .join("")
     .toUpperCase()
     .slice(0, 2);
+
+export const  getfirstWord = (name : string) : string => name.trim().split(" ")[0]

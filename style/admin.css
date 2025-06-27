@@ -175,4 +175,43 @@
     .admin-sidebar .user {
         @apply my-8 flex w-full flex-row gap-2 rounded-full border border-light-400 px-6 py-2 shadow-sm max-md:px-2;
     }
+    /* Book Form */
+    .book-form_input {
+        @apply min-h-14 border border-gray-100 bg-light-600 p-4 text-base font-semibold placeholder:!font-normal placeholder:!text-slate-500 ;
+    }
+
+    .book-form_btn {
+        @apply min-h-14 w-full bg-primary-admin hover:!bg-primary-admin/95;
+    }
+    /* Color Picker */
+    .color-picker {
+        @apply flex min-h-14 flex-row items-center gap-3 rounded-md border border-gray-100 bg-light-600 p-4 text-base font-semibold text-dark-400;
+    }
+
+    .hex-input {
+        @apply h-full flex-1 bg-transparent  outline-none;
+    }
+
+    .hex-color-picker {
+        @apply absolute left-0 top-full z-50 mt-3;
+    }
+
+    /* Error Fallback */
+    .error-fallback {
+        @apply p-4 bg-red-100 text-red-700 rounded-md;
+    }
+
+    .error-fallback h2 {
+        @apply text-lg font-semibold mb-2;
+    }
+
+    /* Header */
+    .admin-header {
+        @apply flex lg:items-end items-start justify-between lg:flex-row flex-col gap-5 sm:mb-10 mb-5;
+    }
+
+    /* Search */
+    .admin-search {
+        @apply flex border border-gray-100 min-h-14 items-center gap-1 rounded-md bg-light-600 px-4 lg:max-w-md w-full;
+    }
 }

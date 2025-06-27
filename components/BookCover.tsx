@@ -1,7 +1,8 @@
 import { cn } from '@/lib/utils';
-import Image from 'next/image';
+import { Image } from '@imagekit/next';
 import React from 'react'
 import BookCoverSvg from './BookCoverSvg';
+import config from '@/lib/config';
 
 type BookCoverVariant = "extraSmall" | "small" | "medium" | "regular" | "wide";
 
@@ -36,7 +37,14 @@ const BookCover = ({
             className="absolute z-10"
             style={{ left: "12%", width: "87.5%", height: "88%" }}
         >
-            <Image src={coverImage} alt='cover url' fill className='rounded-sm objet-fill' />
+            <Image 
+                urlEndpoint={config.env.imagekit.urlEndpoint}
+                src={coverImage} 
+                alt='cover url' 
+                fill 
+                className='rounded-sm objet-fill' 
+                loading = "lazy"
+            />
         </div>
     </div>
   )
