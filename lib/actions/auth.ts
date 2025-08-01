@@ -16,7 +16,7 @@ export const signInWithCreadentials = async (params : Pick<AuthCredentials , "em
     const {email , password} = params;
 
     const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
-    console.log("IP Address:", ip);
+    //console.log("IP Address:", ip);
     const {success} = await ratelimit.limit(ip);
     if(!success) redirect('/too-fast') ;
 

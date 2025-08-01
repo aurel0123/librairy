@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react'
+import React, { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { DefaultValues, FieldValues, Path, SubmitHandler, useForm, UseFormReturn } from "react-hook-form"
 import { ZodTypeAny } from 'zod'
@@ -32,13 +32,16 @@ interface Props <T extends FieldValues > {
 export default function AuthForm<T extends FieldValues>({type , schema , defaultValues , onSubmit} : Props <T>) {
   const router = useRouter();
   const isSignIn = type === "SIGN_IN";
+  const [isLoading, setIsLoading] = useState(false); // Ajout du loader
   const form: UseFormReturn<T> = useForm({
     resolver: zodResolver(schema),
     defaultValues: defaultValues as DefaultValues<T>,
   });
 
   const handleSubmit : SubmitHandler<T> = async (data)=> {
+    setIsLoading(true);
     const result  = await onSubmit(data);
+    setIsLoading(false); // Stoppe le loader
     if(result.success){
       toast.success("Success" , {
         description: isSignIn
@@ -106,8 +109,10 @@ export default function AuthForm<T extends FieldValues>({type , schema , default
             ))
           }
           
-          <Button type="submit" className='form-btn'>
-            {isSignIn ? "Sign In" : "Sign Up"}
+          <Button type="submit" className='form-btn' disabled={isLoading}>
+            {isLoading
+              ? isSignIn ? "Sign In..." : "Sign Up..."
+              : isSignIn ? "Sign In" : "Sign Up"}
           </Button>
         </form>
       </Form>
